@@ -15,6 +15,8 @@ Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-repeat'
 Plug 'tsukkee/unite-tag'
 Plug 'wting/gitsessions.vim'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'reedes/vim-colors-pencil'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
@@ -74,6 +76,7 @@ let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 let g:syntastic_json_checkers = ['jsonlint']
 let g:vim_json_syntax_conceal = 0
+
 set guioptions-=L
 set guioptions-=r 
 let mapleader = "\<space>"
@@ -178,7 +181,8 @@ let g:auto_save = 0  " enable AutoSave on Vim startup
 "endif
 
 
-autocmd Filetype ruby,coffee,sass,scss,jade,erb setlocal ts=2 sw=2 expandtab
+autocmd Filetype ruby,coffee,sass,scss,jade,erb,md,markdown setlocal ts=2 sw=2 
+autocmd Filetype markdown setlocal noexpandtab
 " emmet
 let g:user_emmet_install_global = 0
 autocmd FileType html,erb,css,less,sass,scss EmmetInstall
@@ -187,6 +191,8 @@ autocmd FileType html,erb,css,less,sass,scss imap <buffer> <expr> <tab> emmet#ex
 
 " markdown
 let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_style_pythonic = 0
+let g:vim_markdown_conceal = 0
 
 "inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -214,10 +220,12 @@ nnoremap <C-T> :tabnew %:p:h<CR>
 " fold
 set foldenable
 set foldlevel=10
-set foldmethod=indent
+set foldmethod=manual
 set foldnestmax=5
 nnoremap <space><space> za
 vnoremap <space><space> zf
+
+autocmd FileType coffee,erb,html,css,scss,rb setlocal foldmethod=indent
 "autocmd FileType javascript call JavaScriptFold()
 
 " beautify
@@ -254,6 +262,7 @@ vmap <Leader>d "+d
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
+vmap <Leader>t :tabnew<CR>
 function! ClipboardYank()
     call system('pbcopy', @@)
 endfunction

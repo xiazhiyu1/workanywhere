@@ -1,5 +1,5 @@
-http_proxy=socks5://127.0.0.1:1080
-https_proxy=socks5://127.0.0.1:1080
+#http_proxy=socks5://127.0.0.1:1080
+#https_proxy=socks5://127.0.0.1:1080
 Iskip_global_compinit=1
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/Repos/z/z.sh ] && source  ~/Repos/z/z.sh
@@ -38,7 +38,8 @@ export ANDROID_SDK_ROOT="/Users/frank/Library/Android/sdk"
 alias rs="bundle exec rails server"
 alias open3000="open http://localhost:3000/"
 alias gtd="/usr/local/Cellar/emacs/24.5/Emacs.app/Contents/MacOS/Emacs -nw  ~/Dropbox/all.org"
-alias resetwebstorm="rm ~/Library/Preferences/WebStorm2016.1/eval"
+alias resetwebstorm="rm -rf ~/Library/Preferences/WebStorm2016.1/eval"
+alias resetwebstorm="rm -rf ~/Library/Preferences/RubyMine2016.1/eval"
 alias adb="/Users/frank/Library/Android/sdk/platform-tools/adb"
 alias download="aria2c"
 alias emacs="/usr/local/Cellar/emacs/24.5//Emacs.app/Contents/MacOS/Emacs -nw"
@@ -46,10 +47,11 @@ alias e="emacs"
 alias fapm="/Applications/Atom.app/Contents/Resources/app/apm/bin/apm"
 alias m="tldr"
 alias ll="ls -lht"
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
-    --cache=$HOME/.npm/.cache/cnpm \
-    --disturl=https://npm.taobao.org/dist \
-    --userconfig=$HOME/.cnpmrc"
+#alias cnpm="npm --registry=https://registry.npm.taobao.org \
+    #--cache=$HOME/.npm/.cache/cnpm \
+    #--disturl=https://npm.taobao.org/dist \
+    #--userconfig=$HOME/.cnpmrc"
+alias cnpm="pc npm"
 alias showip="ipconfig getifaddr en0"
 alias ad="asciidoctor"
 alias pc="proxychains4"
@@ -59,7 +61,6 @@ alias rm="trash"
 alias gminiclone="git clone --depth 1 --branch master "
 alias yd="~/Repos/ydcv/ydcv.py"
 alias gst="git status -sb"
-alias gl="git pull"
 alias glr="git pull --rebase"
 alias glb="git pull --rebase"
 alias gll="git pull ; git submodule update"
@@ -79,8 +80,6 @@ alias gcmp="git commit . -m update && git push"
 alias gpp="git pull && git push"
 alias gr="git rebase"
 #alias j="z"
-alias j='z'
-alias jj='zz'
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
 alias gcob="git checkout -b"
 alias gco="git checkout"
@@ -102,7 +101,7 @@ alias h="nvim /etc/hosts"
 #[ -f ~/Repos/zsh-git-prompt/zshrc.sh ] && source ~/Repos/zsh-git-prompt/zshrc.sh
 
 unalias z
-z() {
+j() {
   if [[ -z "$*" ]]; then
     cd "$(_z -l 2>&1 | fzf +s | sed 's/^[0-9,.]* *//')"
   else
@@ -111,7 +110,7 @@ z() {
   fi
 }
 
-zz() {
+jj() {
   cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q $_last_z_args)"
 }
 
@@ -224,6 +223,16 @@ weather(){
 
 iciba(){
     open "http://iciba.com/$1"
+}
+gl(){
+    branch=$(git symbolic-ref --short HEAD)
+    echo "git fetch origin $branch"; 
+    echo "git rebase origin/$branch"; 
+    proxychains4 git fetch origin "$branch"
+    git rebase "origin/$branch"
+}
+jq(){
+    open "dash://jq:$1"
 }
 up(){ DEEP=$1; [ -z "${DEEP}" ] && { DEEP=1; }; for i in $(seq 1 ${DEEP}); do cd ../; done; }
 

@@ -3,6 +3,7 @@
 ||webupd8.org
 ||cloudfront.net
 ||asana.com
+||ruby-doc.org
 ||dexetra.com
 ||karelia.com
 ||amazonaws.com

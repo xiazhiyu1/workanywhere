@@ -6,7 +6,6 @@ spm_modules
 
 # Automatically created by GitHub for Mac
 
-channel/apps/channel_brandin_style/resources/modes/view/view.less
 config.codekit
 .DS_Store
 .AppleDouble
@@ -44,4 +43,3 @@ Temporary Items
 venv
 node_modules
 .sass-cache
-dist
