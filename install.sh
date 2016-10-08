@@ -11,6 +11,7 @@ command_exists python3 || brew install python3
 pip3 install neovim
 command_exists trash || brew install trash
 command_exists node || brew install node
+command_exists rg || brew install https://raw.githubusercontent.com/BurntSushi/ripgrep/master/pkg/brew/ripgrep.rb
 npm install -g git+https://github.com/ramitos/jsctags.git
 brew install git
 command_exists wget || brew install wget
@@ -18,13 +19,13 @@ brew install proxychains-ng
 brew install neovim/neovim/neovim
 
 # yd
-if ! [ -d ~/Repos/ydcv ]; then 
-    mkdir -p ~/Repos/ydcv && git clone --depth=1 --branch=master https://github.com/felixonmars/ydcv.git ~/Repos/ydcv
+if ! [ -d ~/repos/ydcv ]; then 
+    mkdir -p ~/repos/ydcv && git clone --depth=1 --branch=master https://github.com/felixonmars/ydcv.git ~/repos/ydcv
 fi
 
 #
-if ! [ -f ~/Repos/avoscloud_completion.sh]; then
-    curl -L https://raw.githubusercontent.com/leancloud/avoscloud-code-command/master/avoscloud_completion.sh > ~/Repos/avoscloud_completion.sh
+if ! [ -f ~/repos/avoscloud_completion.sh ]; then
+    curl -L https://raw.githubusercontent.com/leancloud/avoscloud-code-command/master/avoscloud_completion.sh > ~/repos/avoscloud_completion.sh
 fi
 
 
@@ -38,8 +39,8 @@ ln -s $(realpath ./vimrc) ~/.vimrc && echo "~/.vimrc copied"
 vim -c ":PlugInstall"
 
 #### z
-if ! [ -d ~/Repos/z ]; then 
-mkdir -p ~/Repos/z && git clone --depth=1 --branch=master https://github.com/rupa/z.git ~/Repos/z
+if ! [ -d ~/repos/z ]; then 
+mkdir -p ~/repos/z && git clone --depth=1 --branch=master https://github.com/rupa/z.git ~/repos/z
 fi
 
 #### fzf
@@ -52,7 +53,8 @@ fi
 [ "$SHELL" != "/bin/zsh" ] && chsh -s /bin/zsh && zsh;
 
 if ! [ -d ~/.zprezto ]; then
- 	proxychains4 -f ./proxychains.conf git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" 
+	proxychains4 -f ./proxychains.conf git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" 
+	echo "Please cd ~/.zprezto and RUN pc git pull && pc git submodule update --init --recursive"	
 fi
 [ -f ~/.zlogin ] || zsh ./zpreztorc_init
 [ -f ~/.zshrc ]  && mv ~/.zshrc ~/.zshrc.old

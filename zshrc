@@ -2,19 +2,20 @@
 #https_proxy=socks5://127.0.0.1:1080
 Iskip_global_compinit=1
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-[ -f ~/Repos/z/z.sh ] && source  ~/Repos/z/z.sh
-#[ -f ~/Repos/avoscloud_completion.sh ] && source  ~/Repos/avoscloud_completion.sh
+[ -f ~/repos/z/z.sh ] && source  ~/repos/z/z.sh
 export NVM_DIR="/Users/frank/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+#[ -f ~/repos/zsh-git-prompt/zshrc.sh ] && source  ~/repos/zsh-git-prompt/zshrc.sh && PROMPT='%B%m%~%b$(git_super_status) %# '
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-
-#export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
-#export RBENV_ROOT=/usr/local/var/rbenv
-#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+autoload -U colors && colors
+#export PS1="
+#%{$fg[red]%}$%{$reset_color%} %{$fg[yellow]%}%~%{$reset_color%}
+## "
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export PATH="${ZDOTDIR:-$HOME}/local/bin:$PATH"
 export PATH="${ZDOTDIR:-$HOME}/Dropbox/bin:$PATH"
 export PATH="$(brew --prefix vim)/bin:$PATH"
@@ -35,7 +36,8 @@ export CPPFLAGS="-I/usr/local/opt/openssl/include"
 export ANDROID_SDK_ROOT="/Users/frank/Library/Android/sdk"
 
 
-alias rs="bundle exec rails server"
+alias ls='ls --color'
+alias bi="bundle install --verbose"
 alias open3000="open http://localhost:3000/"
 alias gtd="/usr/local/Cellar/emacs/24.5/Emacs.app/Contents/MacOS/Emacs -nw  ~/Dropbox/all.org"
 alias resetwebstorm="rm -rf ~/Library/Preferences/WebStorm2016.1/eval"
@@ -47,11 +49,11 @@ alias e="emacs"
 alias fapm="/Applications/Atom.app/Contents/Resources/app/apm/bin/apm"
 alias m="tldr"
 alias ll="ls -lht"
-#alias cnpm="npm --registry=https://registry.npm.taobao.org \
-    #--cache=$HOME/.npm/.cache/cnpm \
-    #--disturl=https://npm.taobao.org/dist \
-    #--userconfig=$HOME/.cnpmrc"
-alias cnpm="pc npm"
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+    --cache=$HOME/.npm/.cache/cnpm \
+    --disturl=https://npm.taobao.org/dist \
+    --userconfig=$HOME/.cnpmrc"
+#alias cnpm="pc npm"
 alias showip="ipconfig getifaddr en0"
 alias ad="asciidoctor"
 alias pc="proxychains4"
@@ -59,7 +61,7 @@ alias gcl="git clone"
 alias therm="rm"
 alias rm="trash"
 alias gminiclone="git clone --depth 1 --branch master "
-alias yd="~/Repos/ydcv/ydcv.py"
+alias yd="~/repos/ydcv/ydcv.py"
 alias gst="git status -sb"
 alias glr="git pull --rebase"
 alias glb="git pull --rebase"
@@ -83,6 +85,7 @@ alias gr="git rebase"
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
 alias gcob="git checkout -b"
 alias gco="git checkout"
+alias gcfrank="git config user.name frankfang; git config user.email frankfang1990@gmail.com; git commit -v"
 alias dnsv2="sudo networksetup -setdnsservers Wi-Fi 178.79.131.110; echo 178.79.131.110"
 alias dns114="sudo networksetup -setdnsservers Wi-Fi 114.114.114.114; echo 114.114.114.114"
 alias dns8="sudo networksetup -setdnsservers Wi-Fi 8.8.8.8; echo 8.8.8.8"
@@ -97,8 +100,6 @@ alias dnsreset="sudo networksetup -setdnsservers Wi-Fi Empty"
 alias dnsv2="sudo networksetup -setdnsservers Wi-Fi 178.79.131.110"
 alias h="nvim /etc/hosts"
 
-
-#[ -f ~/Repos/zsh-git-prompt/zshrc.sh ] && source ~/Repos/zsh-git-prompt/zshrc.sh
 
 unalias z
 j() {
@@ -238,27 +239,5 @@ up(){ DEEP=$1; [ -z "${DEEP}" ] && { DEEP=1; }; for i in $(seq 1 ${DEEP}); do cd
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-
-#https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git-remote-branch/git-remote-branch.plugin.zsh
-
-_git_remote_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ -n $ref ]]; then
-    if (( CURRENT == 2 )); then
-      # first arg: operation
-      compadd create publish rename delete track
-    elif (( CURRENT == 3 )); then
-      # second arg: remote branch name
-      remotes=`git remote | tr '\n' '|' | sed "s/\|$//g"`
-      compadd `git branch -r | grep -v HEAD | sed "s/$remotes\///" | sed "s/ //g"`
-    elif (( CURRENT == 4 )); then
-      # third arg: remote name
-      compadd `git remote`
-    fi
-  else;
-    _files
-  fi
-}
-compdef _git_remote_branch grb
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

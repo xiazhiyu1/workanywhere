@@ -42,4 +42,5 @@ Temporary Items
 # Application specific files
 venv
 node_modules
+vendor/assets/bower/
 .sass-cache
