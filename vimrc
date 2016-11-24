@@ -8,18 +8,22 @@ set shortmess=a
 set autowriteall
 set termguicolors
 
+inoremap <C-L> <Esc>:<c-u>wa<CR>
+nnoremap <C-L> <Esc>:<c-u>wa<CR>
+
 call plug#begin('~/.vim/plugged')
 Plug 'Shutnik/jshint2.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'vim-ruby/vim-ruby'
+Plug 'othree/html5.vim'
+Plug 'vimoutliner/vimoutliner'
 Plug 'leafgarland/typescript-vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'flazz/vim-colorschemes'
+Plug 'FrankFang/vim-colorschemes'
 Plug 'zhaocai/GoldenView.Vim'
 Plug 'majutsushi/tagbar'
-Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
@@ -29,14 +33,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'reedes/vim-colors-pencil'
 Plug 'xolox/vim-misc'
-"Plug 'gcmt/taboo.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'groenewege/vim-less'
 Plug 'keith/swift.vim'
 Plug 'mikewest/vimroom'
 Plug 'sjl/gundo.vim'
 Plug 'altercation/vim-colors-solarized'
-"Plug 'einars/js-beautify'
 Plug 'ervandew/supertab'
 Plug 'groenewege/vim-less'
 Plug 'hail2u/vim-css3-syntax'
@@ -44,7 +46,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'frankfang/mydiary.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'maksimr/vim-jsbeautify'
 Plug 'mattn/emmet-vim'
 Plug 'romainl/flattened'
 Plug 'scrooloose/nerdcommenter'
@@ -123,7 +124,7 @@ let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_new_tab = 0
 let g:nerdtree_tabs_autofind = 0
 
-map <leader>k :Bclose<CR>
+nnoremap <leader>k :Bclose<CR>
 
 
 let g:auto_save = 1  " enable AutoSave on Vim startup
@@ -144,32 +145,24 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>b :b#<CR>
 nnoremap <c-b> :CtrlPBuffer<CR>
 inoremap <c-b> <ESC>:CtrlPBuffer<CR>
 nnoremap <c-e> :CtrlPMRUFiles<CR>
 inoremap <c-e> <ESC>:CtrlPMRUFiles<CR>
-nnoremap <c-m> :CtrlPMRUFiles<CR>
-inoremap <c-m> <ESC>:CtrlPMRUFiles<CR>
 noremap <c-g> <ESC>:Ag<CR>
-let g:ctrlp_use_caching = 0
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
+let g:ctrlp_use_caching = 1
+set grepprg=ag\ --nogroup\ --nocolor
 
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_user_command = 'rg %s --files'
-else
-  let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-        \ }
-endif
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"let g:ctrlp_user_command = 'rg %s --files'
 
 
 
 autocmd Filetype ruby,coffee,sass,scss,jade,erb setlocal ts=2 sw=2
 autocmd Filetype md,markdown setlocal ts=2 sw=2
 autocmd Filetype mk,markdown setlocal noexpandtab
+autocmd Filetype coffee SnipMateLoadScope eruby
 " emmet
 let g:user_emmet_install_global = 1
 "autocmd FileType html,erb,css,less,sass,scss EmmetInstall
@@ -223,7 +216,6 @@ vnoremap <space><space> zf
 nnoremap <space><space> za
 
 
-autocmd FileType coffee,erb,html,css,scss,rb setlocal foldmethod=indent
 
 
 "encoding
@@ -256,8 +248,7 @@ endfunction
 
 noremap ;; :%s:::g<Left><Left><Left>
 noremap ;' :%s:::cg<Left><Left><Left><Left>
-autocmd BufReadPost,FileReadPost *.jsx set syntax=javascript filetype=javascript
-autocmd BufReadPost,FileReadPost *.vm set syntax=html filetype=html
+autocmd FileType coffee,erb,html,css,scss,rb setlocal foldmethod=indent
 map 0 ^
 map j gj
 map k gk
@@ -325,11 +316,8 @@ if has("gui_running")
 endif
 
 " colorscheme
-colorscheme molokai
-let g:molokai_original = 1
-"colorscheme 256-grayvim
+colorscheme molokai 
 set colorcolumn=0
-hi MatchParen term=reverse cterm=bold ctermfg=red ctermbg=none gui=bold guifg=#000000 guibg=#FD971F
 map <F11> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 
@@ -372,24 +360,6 @@ function! MyFilename()
   return r
 endfunction
 
-function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? ' '._ : ''
-  endif
-  return ''
-endfunction
-
-function! HtmlLint()
-  silent !clear
-  execute "!/Users/frank/bin/html5-lint/html5check.py " . expand("%:p")
-endfunction
-
-function! CssLint()
-  silent !clear
-  execute "!csslint --format=compact " . expand("%:p")
-endfunction
-
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 let vimDir = '$HOME/.vim'
@@ -415,11 +385,6 @@ function! s:nerdtree_settings()
   nmap <buffer> <c-c>   :NERDTreeClose<CR>
   nmap <buffer> `   :NERDTreeClose<CR>
 endfunction
-
-augroup VimCSS3Syntax
-  autocmd!
-  autocmd FileType css setlocal iskeyword+=-
-augroup END
 
 "airline
 let g:airline#extensions#tabline#enabled = 1
@@ -451,7 +416,15 @@ fun! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfun
 
-autocmd FileType erb,html,javascript,css,scss,coffee autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
+"autocmd FileType erb,html,javascript,css,scss,coffee autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-set spell spelllang=en_us
+"set spell spelllang=en_us
+
+"rails
+
+
+nnoremap <leader>rt :<c-u>!rails t<CR>
+nnoremap <leader>rr :<c-u>!bin/rake routes<CR>
+nnoremap <leader>rv :<c-u>Eview<CR>
+nnoremap <leader>rc :<c-u>Econtroller<CR>
+"hi MatchParen term=none cterm=none ctermfg=none ctermbg=none gui=none guifg=none guibg=none
