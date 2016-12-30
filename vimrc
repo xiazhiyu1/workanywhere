@@ -218,11 +218,11 @@ nnoremap <space><space> za
 
 
 
-"encoding
-set encoding=utf8
-scriptencoding utf-8
-set fileencodings=ucs-bom,utf-8,gbk,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-autocmd BufNewFile,BufRead *.git/{,modules/**/}{COMMIT,MERGE}* set fenc=utf8
+                    "encoding
+                    set encoding=utf8
+                    scriptencoding utf-8
+                    set fileencodings=ucs-bom,utf-8,gbk,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+                    autocmd BufNewFile,BufRead *.git/{,modules/**/}{COMMIT,MERGE}* set fenc=utf8
 
 
 
