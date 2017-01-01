@@ -212,8 +212,8 @@ set foldlevel=0
 set foldmethod=manual
 set foldnestmax=5
 
-vnoremap <space><space> zf
-nnoremap <space><space> za
+                                    vnoremap <space><space> zf  " press space to fold/unfold code
+                                    nnoremap <space><space> za   " press space to fold/unfold code
 
 
 
