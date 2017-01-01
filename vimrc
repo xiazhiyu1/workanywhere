@@ -11,33 +11,33 @@ set termguicolors
 inoremap <C-L> <Esc>:<c-u>wa<CR>
 nnoremap <C-L> <Esc>:<c-u>wa<CR>
 
-                                  call plug#begin('~/.vim/plugged')
-                                  Plug 'Shutnik/jshint2.vim'
-                                  Plug 'Yggdroot/indentLine'
-                                  Plug 'vim-scripts/vim-auto-save'
-Plug 'vim-ruby/vim-ruby'
-                                  Plug 'othree/html5.vim'
-                                  Plug 'vimoutliner/vimoutliner'
-                                  Plug 'leafgarland/typescript-vim'
-                                  Plug '/usr/local/opt/fzf'
-                                  Plug 'junegunn/fzf.vim'
-                                  Plug 'FrankFang/vim-colorschemes'
-                                  Plug 'zhaocai/GoldenView.Vim'
+call plug#begin('~/.vim/plugged')
+Plug 'Shutnik/jshint2.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'vim-scripts/vim-auto-save'
+                                                    Plug 'vim-ruby/vim-ruby'
+Plug 'othree/html5.vim'
+Plug 'vimoutliner/vimoutliner'
+Plug 'leafgarland/typescript-vim'
+                                                Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'FrankFang/vim-colorschemes'
+Plug 'zhaocai/GoldenView.Vim'
 Plug 'majutsushi/tagbar'
-                                  Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
-                                  Plug 'vim-airline/vim-airline'
-                                  Plug 'vim-airline/vim-airline-themes'
-                                  Plug 'wting/gitsessions.vim'
-                                  Plug 'godlygeek/tabular'
-                                  Plug 'plasticboy/vim-markdown'
-                                  Plug 'reedes/vim-colors-pencil'
-                                  Plug 'xolox/vim-misc'
-                                  Plug 'hail2u/vim-css3-syntax'
-                                  Plug 'groenewege/vim-less'
-                                  Plug 'keith/swift.vim'
+Plug 'tpope/vim-repeat'
+                                                  Plug 'tpope/vim-rails'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'wting/gitsessions.vim'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'reedes/vim-colors-pencil'
+Plug 'xolox/vim-misc'
+Plug 'hail2u/vim-css3-syntax'
+                                              Plug 'groenewege/vim-less'
+Plug 'keith/swift.vim'
 Plug 'mikewest/vimroom'
-                                  Plug 'sjl/gundo.vim'
+  Plug 'sjl/gundo.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ervandew/supertab'
 Plug 'groenewege/vim-less'
@@ -145,12 +145,12 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
-nnoremap <leader>b :b#<CR>
-nnoremap <c-b> :CtrlPBuffer<CR>
-inoremap <c-b> <ESC>:CtrlPBuffer<CR>
-nnoremap <c-e> :CtrlPMRUFiles<CR>
-inoremap <c-e> <ESC>:CtrlPMRUFiles<CR>
-noremap <c-g> <ESC>:Ag<CR>
+                                              nnoremap <leader>b :b#<CR>
+                                              nnoremap <c-b> :CtrlPBuffer<CR>
+                                              inoremap <c-b> <ESC>:CtrlPBuffer<CR>
+                                              nnoremap <c-e> :CtrlPMRUFiles<CR>
+                                              inoremap <c-e> <ESC>:CtrlPMRUFiles<CR>
+                                              noremap <c-g> <ESC>:Ag<CR>
 let g:ctrlp_use_caching = 1
 set grepprg=ag\ --nogroup\ --nocolor
 
@@ -192,19 +192,19 @@ let g:vim_markdown_conceal = 0
 
 let g:session_autoload = 'no'
 
-" tab
-map <leader>1 :b 1<cr>
-map <leader>2 :b 2<cr>
-map <leader>3 :b 3<cr>
-map <leader>4 :b 4<cr>
-map <leader>5 :b 5<cr>
-map <leader>6 :b 6<cr>
-map <leader>7 :b 7<cr>
-map <leader>8 :b 8<cr>
-map <leader>9 :b 9<cr>
-map <s-tab> :bp<cr>
-nnoremap <C-T> :tabnew %:p<CR>
-nnoremap <tab> :bn<cr>
+                                    " tab
+                                    map <leader>1 :b 1<cr>
+                                    map <leader>2 :b 2<cr>
+                                    map <leader>3 :b 3<cr>
+                                    map <leader>4 :b 4<cr>
+                                    map <leader>5 :b 5<cr>
+                                    map <leader>6 :b 6<cr>
+                                    map <leader>7 :b 7<cr>
+                                    map <leader>8 :b 8<cr>
+                                    map <leader>9 :b 9<cr>
+                                    map <s-tab> :bp<cr>
+                                    nnoremap <C-T> :tabnew %:p<CR>
+                                    nnoremap <tab> :bn<cr>
 
 " fold
 set nofen
@@ -218,11 +218,11 @@ nnoremap <space><space> za
 
 
 
-                    "encoding
-                    set encoding=utf8
-                    scriptencoding utf-8
-                    set fileencodings=ucs-bom,utf-8,gbk,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-                    autocmd BufNewFile,BufRead *.git/{,modules/**/}{COMMIT,MERGE}* set fenc=utf8
+"encoding
+set encoding=utf8
+scriptencoding utf-8
+set fileencodings=ucs-bom,utf-8,gbk,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+autocmd BufNewFile,BufRead *.git/{,modules/**/}{COMMIT,MERGE}* set fenc=utf8
 
 
 
@@ -232,32 +232,32 @@ map q: :q
 "vnoremap <silent> y y`]
 "vnoremap <silent> p p`]
 "nnoremap <silent> p p`]
-nnoremap <Leader>w :w<CR>
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>t :tabnew<CR>
-function! ClipboardYank()
+                                                  nnoremap <Leader>w :w<CR>
+                                                  vmap <Leader>y "+y
+                                                  vmap <Leader>d "+d
+                                                  nmap <Leader>p "+p
+                                                  nmap <Leader>P "+P
+                                                  vmap <Leader>p "+p
+                                                  vmap <Leader>t :tabnew<CR>
+                                                  function! ClipboardYank()
   call system('pbcopy', @@)
 endfunction
 function! ClipboardPaste()
   let @@ = system('pbpaste')
 endfunction
 
-noremap ;; :%s:::g<Left><Left><Left>
-noremap ;' :%s:::cg<Left><Left><Left><Left>
+                                                noremap ;; :%s:::g<Left><Left><Left>
+                                                noremap ;' :%s:::cg<Left><Left><Left><Left>
 autocmd FileType coffee,erb,html,css,scss,rb setlocal foldmethod=indent
-map 0 ^
-map j gj
-map k gk
-nnoremap Y "+y
-nnoremap <silent><S-b> :<C-u>call search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%^','bW')<CR>
-nnoremap <silent><S-w> :<C-u>call search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%$','W')<CR>
-noremap <C-S> :w<CR>
-vnoremap <C-T> :tabnew %:p:h<CR>
-noremap <F11> <C-u>:wincmd o<CR>
+                                                map 0 ^
+                                                map j gj
+                                                map k gk
+                                                nnoremap Y "+y
+                                                nnoremap <silent><S-b> :<C-u>call search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%^','bW')<CR>
+                                                nnoremap <silent><S-w> :<C-u>call search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%$','W')<CR>
+                                                noremap <C-S> :w<CR>
+                                                vnoremap <C-T> :tabnew %:p:h<CR>
+                                                noremap <F11> <C-u>:wincmd o<CR>
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " Return to last edit position when opening files (You want this!)
 set autoindent
 set nosmartindent
@@ -400,11 +400,11 @@ endif
 " GoldView
 let g:goldenview__enable_default_mapping = 0
 
-nmap <silent> <C-N>  <Plug>GoldenViewSplit
-nmap <silent> <F11>  <Plug>GoldenViewSwitchToggle
+                                                    nmap <silent> <C-N>  <Plug>GoldenViewSplit
+                                                    nmap <silent> <F11>  <Plug>GoldenViewSwitchToggle
 
-nmap <silent> <C-.>  <Plug>GoldenViewNext
-nmap <silent> <C-,>  <Plug>GoldenViewPrevious
+                                                    nmap <silent> <C-.>  <Plug>GoldenViewNext
+                                                    nmap <silent> <C-,>  <Plug>GoldenViewPrevious
 
 " HTML
 
