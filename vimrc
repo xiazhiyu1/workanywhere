@@ -117,14 +117,14 @@ set iskeyword=@,$,48-57,192-255,_
 let g:NERDTreeWinPos = "right"
 let NERDTreeChDirMode=2
 let NERDTreeQuitOnOpen=1
-nnoremap <leader>f :<C-u>NERDTreeFind<CR>
-"nnoremap <leader>e :<C-u>NERDTree .<CR>\|:wincmd p<CR>
+                                        nnoremap <leader>f :<C-u>NERDTreeFind<CR>
+                                        "nnoremap <leader>e :<C-u>NERDTree .<CR>\|:wincmd p<CR>
 " NERDTree tabs
 let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_open_on_new_tab = 0
 let g:nerdtree_tabs_autofind = 0
 
-nnoremap <leader>k :Bclose<CR>
+                                                      nnoremap <leader>k :Bclose<CR>
 
 
 let g:auto_save = 1  " enable AutoSave on Vim startup
